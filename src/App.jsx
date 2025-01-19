@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import SignUp from "./Pages/SignUp";
-import SignIn from "./Pages/SignIn";
+import SignIn from "./Pages/SignIn/SignIn";
 import ProtectedRoute from "./Authentication/ProtectedRoute";
 import EventsPage from "./Pages/EventsPage";
 import AuthPage from "./Pages/AuthPage";
@@ -19,9 +19,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/Form" replace />} />
+        <Route path="/" element={<Navigate to="/SignIn" replace />} />
 
-        <Route path="/signin" element={<Form />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route
