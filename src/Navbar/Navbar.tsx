@@ -3,12 +3,14 @@ import logo from "../assets/logo.svg";
 import darklogo from "../assets/dark-logo.svg";
 import ThemeToggle from "../ThemeMode/Themetoggle";
 import { useGlobalState } from "../ThemeMode/GlobalStateContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useGlobalState();
+  const { isDark, toggleTheme } = useGlobalState();
+
   return (
     <>
-      <div className="navbar bg-base-100 shadow">
+      <div className="navbar bg-base-100 shadow-md ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -32,13 +34,13 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <Link to="/events">Events</Link>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
+                <a>Forum</a>
+                <ul className="p-2 z-30">
                   <li>
-                    <a>Submenu 1</a>
+                    <Link to="/auth">Auth Page</Link>
                   </li>
                   <li>
                     <a>Submenu 2</a>
@@ -50,25 +52,25 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className=" text-xl">
+          <Link to="/">
             <img
-              src={theme == "cupcake" ? logo : darklogo}
+              src={isDark ? logo : darklogo}
               alt="Connect Together"
-              className="w-40 h-auto m-3 hover:scale-110 transition-all"
+              className="w-40 h-auto m-3 hover:scale-110 transition-all text-xl"
             />
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 1</a>
+              <Link to="/events">Events</Link>
             </li>
             <li>
               <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
+                <summary>Forum</summary>
+                <ul className="p-3">
                   <li>
-                    <a>Submenu 1</a>
+                    <Link to="/auth">Auth Page</Link>
                   </li>
                   <li>
                     <a>Submenu 2</a>
@@ -83,7 +85,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <a className="btn btn-outline">POST</a>
         </div>
         <div className="dropdown dropdown-end">
           <div
@@ -94,7 +96,7 @@ const Navbar = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="https://images.unsplash.com/photo-1612916628677-475f676a6adf"
               />
             </div>
           </div>

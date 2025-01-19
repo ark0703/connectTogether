@@ -1,8 +1,14 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 // Define the type for the context value, including all properties
 interface GlobalStateContextType {
-  theme: string;
+  isDark: boolean;
   toggleTheme: () => void;
   user: { name: string } | null;
   isAuthenticated: boolean;
@@ -16,14 +22,17 @@ const GlobalStateContext = createContext<GlobalStateContextType | undefined>(
 );
 
 export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("cupcake");
+  const [isDark, setIsDark] = useState<boolean>(() =>
+    JSON.parse(localStorage.getItem("isDark") ?? "false")
+  );
   const [user, setUser] = useState<{ name: string } | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    localStorage.setItem("isDark", JSON.stringify(isDark));
+  }, [isDark]);
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === "cupcake" ? "synthwave" : "cupcake"
-    );
+    setIsDark((prev) => !prev);
   };
 
   const login = (userData: { name: string }) => {
@@ -39,7 +48,7 @@ export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   return (
     <GlobalStateContext.Provider
       value={{
-        theme,
+        isDark,
         toggleTheme,
         user,
         isAuthenticated,
